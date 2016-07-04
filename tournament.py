@@ -80,5 +80,26 @@ def swissPairings():
         id2: the second player's unique id
         name2: the second player's name
     """
+    #TODO should use self join
 
+    DB = connect()
+    cursor = DB.cursor()
+    cursor.execute("SELECT id FROM (SELECT * FROM players order by wins desc) as id")
+    ids = cursor.fetchall()
+    cursor.execute("SELECT name FROM (SELECT * FROM players order by wins desc) as names")
+    names = cursor.fetchall()
+    DB.close()
+
+    length = len(ids) / 2
+    i = 1
+    x = 0
+    matches = []
+    
+    while i <= length:
+        pairing = ids[x][0], names[x][0], ids[x+1][0], names[x+1][0]
+        matches.append(pairing)
+        x = x + 2
+        i = i + 1
+
+    return matches
 

@@ -3,8 +3,7 @@
 -- Put your SQL 'create table' statements in this file; also 'create view'
 -- statements if you choose to use it.
 --
--- You can write comments in this file by starting them with two dashes, like
--- these lines here.
+
 
 CREATE TABLE players (id SERIAL PRIMARY KEY,
 						name TEXT,
@@ -17,4 +16,9 @@ CREATE TABLE matches (winner SERIAL REFERENCES players,
 						loser SERIAL REFERENCES players,
 						matchID SERIAL PRIMARY KEY);
 
-CREATE TABLE swissPairings();
+
+
+CREATE TABLE swissPairings(player1 SERIAL REFERENCES players,
+							player1Name TEXT REFERENCES players,
+							player2 SERIAL REFERENCES players,
+							player2Name TEXT REFERENCES players);
